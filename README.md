@@ -58,3 +58,10 @@ stratified train/validation/test split, the preprocessing pipeline (encoding + s
 the training fold), the baseline/Logistic Regression/ensemble models, threshold analysis, model
 comparison and final selection, the single held-out test evaluation, diagnostics, feature
 importance, and the final conclusion.
+
+## Update log
+- Feature engineering added: `bill_to_limit_ratio`, `pay_to_bill_ratio`, `max_delay`,
+  `total_delinquent_months` (all deterministic row-wise combinations of existing columns, so
+  safe to compute before the split).
+- Stratified 70/15/15 train/validation/test split implemented and verified (default rate
+  matches ~22.1% across all three subsets).
