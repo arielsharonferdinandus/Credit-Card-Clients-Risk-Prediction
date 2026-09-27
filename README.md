@@ -62,6 +62,7 @@ Implemented so far:
   threshold on the validation set instead of assuming the default 0.5 cutoff
 - Model comparison and final selection: Gradient Boosting chosen as the final model based on
   validation F1 and ROC AUC, at its own optimal threshold
+- Final test evaluation: the selected model scored once on the held-out test set (F1 0.544,
+  ROC AUC 0.778 — close to its validation performance, confirming the selection generalized)
 
-Not yet implemented: the single held-out test evaluation, diagnostics, feature importance, and
-the final conclusion.
+Not yet implemented: diagnostics, feature importance, and the final conclusion.
