@@ -58,6 +58,8 @@ Implemented so far:
   across all four models fitted so far
 - Cross-validated hyperparameter tuning for Logistic Regression, Random Forest, and gradient
   boosting, with tuned models re-evaluated on the validation set
+- Per-model threshold analysis, finding each tuned model's F1-maximizing classification
+  threshold on the validation set instead of assuming the default 0.5 cutoff
 
-Not yet implemented: threshold analysis, model comparison and final selection, the single
-held-out test evaluation, diagnostics, feature importance, and the final conclusion.
+Not yet implemented: model comparison and final selection, the single held-out test evaluation,
+diagnostics, feature importance, and the final conclusion.
