@@ -56,7 +56,8 @@ Implemented so far:
   and coefficient interpretation
 - Two tree-based ensembles (Random Forest and gradient boosting) with an interim comparison
   across all four models fitted so far
+- Cross-validated hyperparameter tuning for Logistic Regression, Random Forest, and gradient
+  boosting, with tuned models re-evaluated on the validation set
 
-Not yet implemented: hyperparameter tuning, threshold analysis, model comparison and final
-selection, the single held-out test evaluation, diagnostics, feature importance, and the final
-conclusion.
+Not yet implemented: threshold analysis, model comparison and final selection, the single
+held-out test evaluation, diagnostics, feature importance, and the final conclusion.
