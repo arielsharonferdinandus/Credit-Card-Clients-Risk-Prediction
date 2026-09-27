@@ -60,6 +60,8 @@ Implemented so far:
   boosting, with tuned models re-evaluated on the validation set
 - Per-model threshold analysis, finding each tuned model's F1-maximizing classification
   threshold on the validation set instead of assuming the default 0.5 cutoff
+- Model comparison and final selection: Gradient Boosting chosen as the final model based on
+  validation F1 and ROC AUC, at its own optimal threshold
 
-Not yet implemented: model comparison and final selection, the single held-out test evaluation,
-diagnostics, feature importance, and the final conclusion.
+Not yet implemented: the single held-out test evaluation, diagnostics, feature importance, and
+the final conclusion.
