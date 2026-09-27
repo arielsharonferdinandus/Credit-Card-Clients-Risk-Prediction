@@ -9,6 +9,8 @@ Leakage-aware, imbalance-aware, reproducible binary classification study on the 
 project/
 ├── Main.ipynb                          # Main analytical notebook
 ├── default-of-credit-card-clients.csv  # Dataset (30,000 rows x 25 columns)
+├── Executive_Summary.pdf               # Decision-oriented summary to a non-technical stakeholder
+├── Directory_Inventory.pdf             # Contains an inventory of files and directories available
 └── README.md                           # This file
 ```
 
