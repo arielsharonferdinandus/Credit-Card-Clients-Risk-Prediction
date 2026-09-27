@@ -34,37 +34,46 @@ project/
    success it caches a verified copy to `default-of-credit-card-clients.csv`. If the live fetch
    fails (no internet, UCI API downtime, rate limiting), it automatically falls back to that
    local cached copy if present, so the notebook still runs end-to-end offline.
+4. **Runtime note:** hyperparameter tuning uses cross-validated search and takes a few minutes
+   on a single CPU core; a multi-core Colab runtime will finish faster.
 
-## Status
+## Result
 
-Implemented so far:
+The final model is a tuned Gradient Boosting classifier, selected on validation F1/ROC AUC and
+evaluated once on the held-out test set:
+
+| Metric | Test Set |
+|---|---|
+| Accuracy | 0.805 |
+| Precision | 0.563 |
+| Recall | 0.527 |
+| F1 | 0.544 |
+| ROC AUC | 0.778 |
+
+Recent repayment status is the dominant predictor, confirmed independently through exploratory
+analysis, Logistic Regression coefficients, Random Forest importances, and permutation
+importance on the test set. The model has a disclosed blind spot: it struggles to catch
+defaults that occur without a prior delinquency trail. See the notebook's Final Conclusion
+section for the full discussion of limitations and appropriate use.
+
+## Status: Complete
+
+All sections implemented:
 - Executive project summary, project overview, and dataset description with a full data
   dictionary
 - Data loading with live-fetch-and-verified-fallback, plus structural verification
-- Data quality assessment: missingness, duplicates, undocumented categories in
-  `EDUCATION`/`MARRIAGE`, `PAY_X` sentinel values, negative `BILL_AMT` interpretation, target
-  imbalance, and a leakage audit
+- Data quality assessment: missingness, duplicates, undocumented categories, `PAY_X` sentinel
+  values, negative `BILL_AMT` interpretation, target imbalance, and a leakage audit
 - Data preparation: ID handling, target verification, undocumented-category recoding, an
-  outlier review, and repayment-status (`PAY_X`) recoding
+  outlier review, and repayment-status recoding
 - Exploratory data analysis: univariate, categorical default-rate, multivariate, and
   correlation analysis
-- Feature engineering: `bill_to_limit_ratio`, `pay_to_bill_ratio`, `max_delay`,
-  `total_delinquent_months`
+- Feature engineering: utilization/payment ratios and delinquency-summary indicators
 - Stratified 70/15/15 train/validation/test split, verified for class balance
 - Preprocessing pipeline: scaling + one-hot encoding, fit on the training fold only
-- A majority-class baseline and a Logistic Regression model, with a shared evaluation helper
-  and coefficient interpretation
-- Two tree-based ensembles (Random Forest and gradient boosting) with an interim comparison
-  across all four models fitted so far
-- Cross-validated hyperparameter tuning for Logistic Regression, Random Forest, and gradient
-  boosting, with tuned models re-evaluated on the validation set
-- Per-model threshold analysis, finding each tuned model's F1-maximizing classification
-  threshold on the validation set instead of assuming the default 0.5 cutoff
-- Model comparison and final selection: Gradient Boosting chosen as the final model based on
-  validation F1 and ROC AUC, at its own optimal threshold
-- Final test evaluation: the selected model scored once on the held-out test set (F1 0.544,
-  ROC AUC 0.778 — close to its validation performance, confirming the selection generalized)
-- Diagnostics: ROC curve, precision-recall curve, calibration curve, and an error-profile
-  analysis of false negatives vs. false positives on the test set
-
-Not yet implemented: feature importance and the final conclusion.
+- Baseline, Logistic Regression, Random Forest, and Gradient Boosting models
+- Cross-validated hyperparameter tuning and per-model threshold analysis
+- Model comparison, final selection, and a single held-out test evaluation
+- Diagnostics (ROC, precision-recall, calibration, error analysis) and permutation feature
+  importance
+- Final conclusion covering results, key drivers, limitations, and suggested use
